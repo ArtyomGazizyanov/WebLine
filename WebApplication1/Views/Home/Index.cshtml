@@ -1,0 +1,73 @@
+﻿<div class="jumbotron">
+    <h1>Управление Отелями</h1>
+
+    <div class="row">
+        <table class="row">
+            <thead>
+                <tr>
+                    <th class="col-md-2">Название</th>
+                    <th class="col-md-2">Телефон</th>
+                    <th class="col-md-2">Адрес</th>
+                    <th class="col-md-2">Email</th>
+                    <th class="col-md-2">Состояние</th>
+                    <th class="col-md-2">Функции</th>
+                </tr>
+            </thead>
+            <tbody id="allHotels"></tbody>
+        </table>
+    </div>
+</div>
+    @section scripts
+    {
+        <script>
+            $(document).ready(function () {
+                $.ajax({
+                    url: "http://localhost:1329/api/Hotel",
+                    type: "Get",
+                    dataType: 'json',
+                    contentType: 'application/json;charset=utf-8',
+                    success: function (data) {
+                        html = "";
+                        $.each(data, function (key, val) {
+                            item = jQuery.parseJSON(val);
+                            html +=
+                                "<tr id = " + item.HotelId + ">" +
+                                    "<td>" + item.Name + "</td >" +
+                                    "<td>" + item.Phone + "</td>" +
+                                    "<td>" + item.Address + "</td>" +
+                                    "<td>" + item.Email + "</td>" +
+                                    "<td>" + item.State + "</td>" +
+                                    "<td> <div class='delete_button btn btn-primary btn-lg'>Удалить</div> </td>" +
+                                "</tr>";
+                        });
+
+                        $('#allHotels').html(html);
+                    }
+                });
+            });
+         </script>
+
+    <script>
+        $("table").on("click", ".delete_button", function () {
+            var hotelId = $(this).parent().parent().attr('id');
+            $.ajax({
+                url: "http://localhost:1329/api/Hotel/" + hotelId,
+                type: "DELETE",
+                contentType: "application/json",
+                success: function () {
+                    console.log("Proposal deleted successfully. DELETED = " + hotelId);
+                    $("table").parent().parent().slideUp();
+                },
+                error: function ()
+                {
+                    console.log("Error on delete");
+                }
+            });        
+
+            $(this).parent().parent().slideUp(); 
+        });
+         
+
+    </script>
+     }
+    
