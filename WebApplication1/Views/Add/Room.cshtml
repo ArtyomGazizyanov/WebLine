@@ -1,0 +1,61 @@
+﻿
+<div>        
+<h2>Table</h2>    
+        <form id="edit_Form">
+            <input name="__RequestVerificationToken" type="hidden" value="m9mDIGkGgblQ_f_I-oiGQjmbQmGdj3C-OPvROkZvhJX2ksp6cxaJTmstKYgvzFTjILE_ax9f1IsEW1bp8xh9Isnawf17sTZjRNf6ACnECks1" />    <div class="form-horizontal">
+                <h4>HotelDto</h4>
+                <hr /> 
+
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="Name">Name</label>
+                    <div class="col-md-10">
+                        <input class="form-control text-box single-line" id="Name" name="Name" type="text" value="" />
+                        <span class="field-validation-valid text-danger" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="AdultBeds">Adult Beds</label>
+                    <div class="col-md-10">                        
+                        <input class="form-control text-box single-line" data-val="true" data-val-number="Значением поля AdultBeds должно быть число." data-val-required="Требуется поле AdultBeds." id="AdultBeds" name="AdultBeds" type="number" value="" />
+                        <span class="field-validation-valid text-danger" data-valmsg-for="AdultBeds" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="ChildrenBeds">Children Beds</label>
+                    <div class="col-md-10">                        
+                        <input class="form-control text-box single-line" data-val="true" data-val-number="Значением поля State должно быть число." data-val-required="Требуется поле ChildrenBeds." id="ChildrenBeds" name="ChildrenBeds" type="number" value="" />
+                        <span class="field-validation-valid text-danger" data-valmsg-for="ChildrenBeds" data-valmsg-replace="true"></span>
+                    </div>
+                </div> 
+
+                <div class="form-group">
+                    <label class="control-label col-md-2" for="State">State</label>
+                    <div class="col-md-10">
+                        <input class="form-control text-box single-line" data-val="true" data-val-number="Значением поля State должно быть число." data-val-required="Требуется поле State." id="State" name="State" type="number" value="" />
+                        <span class="field-validation-valid text-danger" data-valmsg-for="State" data-valmsg-replace="true"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div id="error_box">
+            <span>Ничего не найдено!</span>
+        </div>
+        <div id="back_to_list">
+        </div>
+    </div>
+@section scripts
+{  
+    <script type="text/javascript" src="../../Scripts/ErrorBoxHandler.js"></script>
+    <script type="text/javascript" src="../../Scripts/InputChecker.js"></script>   
+    <script type="text/javascript" src="../../Scripts/GetUrlParametrs.js"></script>
+    <script type="text/javascript" src="../../Scripts/RoomIndex/CreateBackButton.js"></script> 
+    <script type="text/javascript" src="../../Scripts/RoomIndex/AddNewRoom.js"></script> 
+}

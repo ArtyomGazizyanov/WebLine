@@ -32,3 +32,9 @@ tr
 {
     cursor: pointer;
 }
+
+#error_box,
+#search_result 
+{
+    display: none;
+}

@@ -52,6 +52,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -177,15 +178,21 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\ChangeHotelController.cs" />
+    <Compile Include="Controllers\AddController.cs" />
+    <Compile Include="Controllers\EditController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\HotelController.cs" />
+    <Compile Include="Controllers\API\HotelController.cs" />
+    <Compile Include="Controllers\API\RoomApiController.cs" />
+    <Compile Include="Controllers\RoomController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Configuration\HotelsConfiguration.cs" />
-    <Compile Include="Models\Hotel.cs" />
+    <Compile Include="Models\HotelDto.cs" />
+    <Compile Include="Models\RoomDto.cs" />
+    <Compile Include="Models\SearchResultDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -220,12 +227,31 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\GetUrlParametrs.js" />
+    <Content Include="Scripts\HotelIndex\AddButton.js" />
+    <Content Include="Scripts\ErrorBoxHandler.js" />
+    <Content Include="Scripts\HotelIndex\Edit.js" />
+    <Content Include="Scripts\HotelIndex\EditButton.js" />
+    <Content Include="Scripts\HotelIndex\FunctionButtonsBar.js" />
+    <Content Include="Scripts\HotelIndex\GetAHotel.js" />
+    <Content Include="Scripts\HotelIndex\GetAllHotelsFromDB.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Scripts\RoomIndex\AddNewRoom.js" />
+    <Content Include="Scripts\RoomIndex\CreateBackButton.js" />
+    <Content Include="Scripts\RoomIndex\Functions.js" />
+    <Content Include="Scripts\RoomIndex\GetAllRooms.js" />
+    <Content Include="Scripts\RoomIndex\GetARoom.js" />
+    <Content Include="Scripts\RoomIndex\SaveEditChanges.js" />
+    <Content Include="Scripts\InputChecker.js" />
+    <Content Include="Scripts\Search\ResponseHandler.js" />
+    <Content Include="Scripts\Search\StartSearch.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -239,8 +265,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\ChangeHotel\Index.cshtml" />
-    <Content Include="Views\ChangeHotel\Get.cshtml" />
+    <Content Include="Views\Edit\Hotel.cshtml" />
+    <Content Include="Views\Room\Index.cshtml" />
+    <Content Include="Views\Edit\Room.cshtml" />
+    <Content Include="Views\Add\Hotel.cshtml" />
+    <Content Include="Views\Add\Room.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

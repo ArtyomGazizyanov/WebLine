@@ -6,82 +6,65 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Web.Script.Serialization;
 using System.Net.Http;
+using Core.Models;
+using System.Data;
 
 namespace Core.DataStoreFacade
 {
     public class DataHotelFacade
     {
-        public static Models.Hotel GetInstance( int id )
+        public static Hotel GetInstance( int id  )
         {
-            Models.Hotel hotel = new Models.Hotel();
+            Hotel hotel = null;
 
-            using (SqlConnection connection = DBConfiguration.GetConnection())
+            using ( SqlConnection connection = DBConfiguration.GetConnection() )
             {
                 SqlCommand cmd = connection.CreateCommand();
-                cmd.CommandText = ( "SELECT * " +
-                                   "FROM Hotels " +
-                                   "WHERE id=" + id );
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                cmd.Parameters.Add( "@id", SqlDbType.Int ).Value = id;
+                cmd.CommandText = ( @"SELECT * 
+                                   FROM Hotels
+                                   WHERE hotelId=@id" );
+
+                using ( SqlDataReader reader = cmd.ExecuteReader() )
                 {
-                    if (reader.Read())
+                    if ( reader.Read() )
                     {
-                        hotel.SetData(reader);
+                        hotel = new Hotel( reader );
                     }
                 }
             }
             return hotel;
         }
 
-        public static List<string> GetAllHotels()
-        {
-            Models.Hotel hotel = new Models.Hotel();
-            List<string> hotelList = new List<string>();
-            using (SqlConnection connection = DBConfiguration.GetConnection())
+        public static List<Hotel> GetAllHotels()
+        {            
+            List<Hotel> hotelList = new List<Hotel>();
+            using ( SqlConnection connection = DBConfiguration.GetConnection() )
             {
                 SqlCommand cmd = connection.CreateCommand();
-                cmd.CommandText = ("SELECT * " +
-                                   "FROM Hotels");
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                cmd.CommandText = ( @"SELECT * 
+                                   FROM Hotels" );
+                using ( SqlDataReader reader = cmd.ExecuteReader() )
                 {
-                    while (reader.Read())
+                    while ( reader.Read() )
                     {
-                        hotel.SetData(reader);
-                        var jsonData = new JavaScriptSerializer().Serialize(hotel);
-                        hotelList.Add(jsonData);
+                        Hotel hotel = new Hotel( reader );
+                        hotelList.Add( hotel );
                     }
                 }
             }
             return hotelList;
         }
+         
 
-        public static void Save(Models.Hotel hotel)
+        public static void Save( Hotel hotel )
         {
-            using (SqlConnection connection = DBConfiguration.GetConnection())
-            {
-                SqlCommand cmd = connection.CreateCommand();
-                cmd.CommandText = ( "UPDATE Hotels " +
-                                   "SET name =" + hotel.Name + " " +                                   
-                                   "WHERE id = " + hotel.HotelId );
-                cmd.ExecuteReader();                
-            }
+            hotel.Save();
         }
 
-        public static void Delete(int id)
+        public static void Delete( int id )
         {
-            Core.Models.Hotel.Delete(id);
-           /* try
-            {
-                using (SqlConnection connection = DBConfiguration.GetConnection())
-                {
-                    using (SqlCommand command = new SqlCommand("DELETE FROM Hotels WHERE id =" + id, connection))
-                    {
-                        command.ExecuteNonQuery();
-                    }                 
-                }
-            }
-            catch (ConfigurationErrorsException)
-            {
-            }*/
+            Hotel.Delete( id ); 
         }
     }
 }
